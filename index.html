@@ -15,7 +15,6 @@
   --page-bg-light: #fff8f0;
   --page-bg-dark: #2a2a2a;
 }
-
 body {
   margin: 0;
   font-family: 'Georgia', serif;
@@ -24,12 +23,10 @@ body {
   transition: background 0.5s, color 0.5s;
   scroll-behavior: smooth;
 }
-
 .dark-theme {
   background: var(--dark-bg);
   color: var(--dark-text);
 }
-
 header {
   display: flex;
   justify-content: space-between;
@@ -44,34 +41,44 @@ header {
 .dark-theme header {
   background: #1e1e1e;
 }
-
 .container {
   display: flex;
   min-height: 100vh;
 }
-
 .sidebar {
-  position: fixed;
-  top: 80px;
-  left: 20px;
   width: 250px;
-  max-height: 80vh;
   background: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   padding: 20px;
   overflow-y: auto;
-  transform: translateX(-300px);
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0;
-  z-index: 1001;
+  border-right: 1px solid #ddd;
+  transition: transform 0.3s ease, visibility 0.3s ease;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  z-index: 999;
 }
-.sidebar.show {
-  transform: translateX(0);
-  opacity: 1;
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: calc(100% - 60px);
+    background: var(--page-bg-light);
+    transform: translateX(-100%);
+    visibility: hidden;
+    width: 250px;
+  }
+  .sidebar.show {
+    transform: translateX(0);
+    visibility: visible;
+  }
 }
+
 .dark-theme .sidebar {
   background: #2a2a2a;
+  border-color: #444;
 }
 .sidebar a {
   display: block;
@@ -83,13 +90,10 @@ header {
 .sidebar a.active {
   color: var(--accent);
 }
-
 .page-container {
   flex: 1;
   padding: 20px;
-  margin-left: 0;
 }
-
 .page {
   background: var(--page-bg-light);
   border-radius: 12px;
@@ -103,26 +107,15 @@ header {
 .dark-theme .page {
   background: var(--page-bg-dark);
 }
-
 h1, h2 {
   font-family: 'Playfair Display', serif;
   text-align: center;
-}
-h2.part-title {
-  font-size: 2em;
-  font-weight: bold;
-  margin-top: 80px;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--accent);
 }
 p {
   line-height: 1.7;
   margin-top: 20px;
   text-align: justify;
 }
-
 .switch {
   position: relative;
   display: inline-block;
@@ -162,14 +155,47 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(22px);
 }
+.fade-in {
+  animation: fadeInPage 1s ease;
+}
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-@media (max-width: 768px) {
-  .sidebar {
-    top: 60px;
-    left: 0;
-    width: 220px;
-    height: calc(100% - 60px);
-    border-radius: 0;
+/* Красивые блоки ЧАСТЕЙ */
+.part-block {
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), var(--page-bg-light);
+  background-size: cover;
+  border-radius: 20px;
+  padding: 120px 20px;
+  margin: 100px auto;
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: fadeInBlock 1.5s ease forwards;
+  opacity: 0;
+}
+.dark-theme .part-block {
+  background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), var(--page-bg-dark);
+  background-size: cover;
+}
+.part-block h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8em;
+  color: var(--accent);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+@keyframes fadeInBlock {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
@@ -191,8 +217,9 @@ input:checked + .slider:before {
   <main class="page-container" id="content">
 
     <div class="page" id="part1">
-      <h2 class="part-title">ЧАСТЬ 1</h2>
-      <p>...</p>
+      <div class="part-block">
+        <h2>ЧАСТЬ 1</h2>
+      </div>
     </div>
 
     <div class="page" id="chapter1">
@@ -216,8 +243,9 @@ input:checked + .slider:before {
     </div>
 
     <div class="page" id="part2">
-      <h2 class="part-title">ЧАСТЬ 2</h2>
-      <p>...</p>
+      <div class="part-block">
+        <h2>ЧАСТЬ 2</h2>
+      </div>
     </div>
 
     <div class="page" id="interlude1">
@@ -273,7 +301,6 @@ input:checked + .slider:before {
     sidebar.classList.toggle('show');
   });
 
-  // Генерация оглавления
   sidebar.innerHTML = '';
   const headers = content.querySelectorAll('h1, h2');
   headers.forEach((header, index) => {
@@ -283,14 +310,13 @@ input:checked + .slider:before {
     const link = document.createElement('a');
     link.href = `#${header.id}`;
     link.textContent = header.textContent;
-    if (header.tagName === 'H2' && !header.classList.contains('part-title')) {
+    if (header.tagName === 'H2' && !header.classList.contains('part-block')) {
       link.style.marginLeft = '15px';
       link.style.fontSize = '0.9em';
     }
     sidebar.appendChild(link);
   });
 
-  // Подсветка активного пункта меню
   window.addEventListener('scroll', () => {
     let fromTop = window.scrollY;
     const links = sidebar.querySelectorAll('a');
