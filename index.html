@@ -137,14 +137,13 @@ input:checked + .slider:before {
   transform: translateX(22px);
 }
 @media (max-width: 768px) {
-  .sidebar {
-    position: absolute;
+.sidebar {
+    position: sticky;
     top: 60px;
-    height: calc(100% - 60px);
+    height: calc(100vh - 60px);
     background: var(--page-bg-light);
+    overflow-y: auto;
     z-index: 999;
-    transform: translateX(-100%);
-  }
 }
 .fade-in {
   animation: fadeInPage 1s ease;
