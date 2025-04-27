@@ -51,20 +51,27 @@ header {
 }
 
 .sidebar {
+  position: fixed;
+  top: 80px;
+  left: 20px;
   width: 250px;
+  max-height: 80vh;
   background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
   padding: 20px;
   overflow-y: auto;
-  border-right: 1px solid #ddd;
-  transition: transform 0.3s ease, visibility 0.3s ease;
-  position: sticky;
-  top: 60px;
-  height: calc(100vh - 60px);
-  z-index: 999;
+  transform: translateX(-300px);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 1001;
+}
+.sidebar.show {
+  transform: translateX(0);
+  opacity: 1;
 }
 .dark-theme .sidebar {
   background: #2a2a2a;
-  border-color: #444;
 }
 .sidebar a {
   display: block;
@@ -80,7 +87,7 @@ header {
 .page-container {
   flex: 1;
   padding: 20px;
-  transition: margin-left 0.3s ease;
+  margin-left: 0;
 }
 
 .page {
@@ -158,20 +165,11 @@ input:checked + .slider:before {
 
 @media (max-width: 768px) {
   .sidebar {
-    position: fixed;
-    left: 0;
     top: 60px;
+    left: 0;
+    width: 220px;
     height: calc(100% - 60px);
-    background: var(--page-bg-light);
-    transform: translateX(-100%);
-    visibility: hidden;
-  }
-  .sidebar.show {
-    transform: translateX(0);
-    visibility: visible;
-  }
-  .page-container {
-    margin-left: 0;
+    border-radius: 0;
   }
 }
 </style>
@@ -292,7 +290,7 @@ input:checked + .slider:before {
     sidebar.appendChild(link);
   });
 
-  // Подсвечивание активного пункта оглавления
+  // Подсветка активного пункта меню
   window.addEventListener('scroll', () => {
     let fromTop = window.scrollY;
     const links = sidebar.querySelectorAll('a');
@@ -306,6 +304,7 @@ input:checked + .slider:before {
       }
     });
   });
+
 })();
 </script>
 </body>
