@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -154,7 +155,6 @@ input:checked + .slider:before {
 }
 </style>
 </head>
-
 <body>
 <header>
   <button class="toggle-sidebar">☰</button>
@@ -170,24 +170,20 @@ input:checked + .slider:before {
   </nav>
 
   <main class="page-container" id="content">
-    <!-- ЧАСТЬ 1 -->
-    <div class="page" id="part1"><h2>ЧАСТЬ 1</h2></div>
+    <div class="page" id="part1"><h2>ЧАСТЬ 1</h2><p>...</p></div>
+    <div class="page" id="chapter1"><h1>Глава 1. Да здравствует новый Творец!</h1><p>...</p></div>
+    <div class="page" id="chapter2"><h1>Глава 2. Арканум и Горный дворец</h1><p>...</p></div>
+    <div class="page" id="chapter3"><h1>Глава 3. Архитектор</h1><p>...</p></div>
+    <div class="page" id="appendix1"><h2>Дополнение 1. История Некто</h2><p>...</p></div>
 
-    <div class="page" id="chapter1"><h1>Глава 1. Да здравствует новый Творец!</h1></div>
-    <div class="page" id="chapter2"><h1>Глава 2. Арканум и Горный дворец</h1></div>
-    <div class="page" id="chapter3"><h1>Глава 3. Архитектор</h1></div>
-    <div class="page" id="appendix1"><h2>Дополнение 1. История Некто</h2></div>
-
-    <!-- ЧАСТЬ 2 -->
-    <div class="page" id="part2"><h2>ЧАСТЬ 2</h2></div>
-
-    <div class="page" id="interlude1"><h2>Интерлюдия 1</h2></div>
-    <div class="page" id="chapter4"><h1>Глава 1. Сон или реальность?</h1></div>
-    <div class="page" id="chapter5"><h1>Глава 2. «Слава пользователям!»</h1></div>
-    <div class="page" id="chapter6"><h1>Глава 3. Цифровая вселенная «Сеть»</h1></div>
-    <div class="page" id="chapter7"><h1>Глава 4. Угроза из будущего</h1></div>
-    <div class="page" id="interlude2"><h2>Интерлюдия 2</h2></div>
-    <div class="page" id="chapter8"><h1>Глава 5. Юниверсум</h1></div>
+    <div class="page" id="part2"><h2>ЧАСТЬ 2</h2><p>...</p></div>
+    <div class="page" id="interlude1"><h2>Интерлюдия 1</h2><p>...</p></div>
+    <div class="page" id="chapter4"><h1>Глава 1. Сон или реальность?</h1><p>...</p></div>
+    <div class="page" id="chapter5"><h1>Глава 2. «Слава пользователям!»</h1><p>...</p></div>
+    <div class="page" id="chapter6"><h1>Глава 3. Цифровая вселенная «Сеть»</h1><p>...</p></div>
+    <div class="page" id="chapter7"><h1>Глава 4. Угроза из будущего</h1><p>...</p></div>
+    <div class="page" id="interlude2"><h2>Интерлюдия 2</h2><p>...</p></div>
+    <div class="page" id="chapter8"><h1>Глава 5. Юниверсум</h1><p>...</p></div>
   </main>
 </div>
 
@@ -225,6 +221,7 @@ input:checked + .slider:before {
   window.addEventListener('scroll', () => {
     let fromTop = window.scrollY;
     const links = sidebar.querySelectorAll('a');
+    const headers = content.querySelectorAll('h1, h2');
 
     headers.forEach(header => {
       const link = sidebar.querySelector(`a[href="#${header.id}"]`);
@@ -237,6 +234,5 @@ input:checked + .slider:before {
 
 })();
 </script>
-
 </body>
 </html>
