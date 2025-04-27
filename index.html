@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юниверсум: Книга Версума</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: #f4f1ee;
+  color: #333;
+  transition: background 0.5s, color 0.5s;
+  scroll-behavior: smooth;
+}
+.dark-theme {
+  background: #121212;
+  color: #e0e0e0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+}
+.page {
+  background: white;
+  max-width: 800px;
+  width: 100%;
+  padding: 50px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  animation: fadeIn 1.5s ease;
+}
+.dark-theme .page {
+  background: #1e1e1e;
+  box-shadow: 0 0 30px rgba(255,255,255,0.05);
+}
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  margin-top: 60px;
+}
+p {
+  text-align: justify;
+  line-height: 1.8;
+  margin: 15px 0;
+}
+p::first-letter {
+  float: left;
+  font-size: 3em;
+  line-height: 1;
+  padding-right: 8px;
+  font-weight: bold;
+}
+#menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10000;
+}
+.dark-theme #menu-toggle {
+  background: #BB86FC;
+}
+#sidebar {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  background: rgba(255,255,255,0.9);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: scale(0);
+  transform-origin: top left;
+  transition: transform 0.3s;
+}
+.dark-theme #sidebar {
+  background: rgba(30,30,30,0.9);
+}
+#sidebar a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: inherit;
+}
+#sidebar.show {
+  transform: scale(1);
+}
+#loader {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background:#ffffff; color:#333;
+  display:flex; align-items:center; justify-content:center;
+  font-family:Georgia,serif; font-size:24px; z-index:9999;
+  transition: opacity 0.5s ease;
+}
+.dark-theme #loader {
+  background:#121212; color:#e0e0e0;
+}
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+</style>
+</head>
+<body>
+<div id="loader">Загрузка книги...</div>
+<button id="menu-toggle">📚</button>
+<div id="sidebar"></div>
+<div class="container">
+  <div class="page" id="content">
+    <!-- Реальный текст книги будет вставлен сюда -->
+  </div>
+</div>
+<script>
+document.getElementById('menu-toggle').onclick = function() {
+  document.getElementById('sidebar').classList.toggle('show');
+};
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('fade-out');
+  }, 500);
+});
 
+// Переключение темы через кнопку "T"
+const toggleTheme = () => document.body.classList.toggle('dark-theme');
+window.addEventListener('keydown', e => { if (e.key === "t") toggleTheme(); });
+
+// Заполняем оглавление и содержимое
+const chapters = [
+  {id: "ch1", title: "Глава 1. «Да здравствует новый Творец!»"},
+  {id: "ch2", title: "Глава 2. Арканум и Горный дворец"},
+  {id: "ch3", title: "Глава 3. Архитектор"},
+  {id: "ch4", title: "Глава 4. Райское место"},
+  {id: "ch5", title: "Глава 5. Первые ответы"},
+  {id: "ch6", title: "Глава 6. Свершилось!"},
+  {id: "interlude1", title: "Интерлюдия 1"},
+  {id: "ch7", title: "Глава 7. Сон или реальность?"},
+  {id: "ch8", title: "Глава 8. «Слава пользователям!»"},
+  {id: "ch9", title: "Глава 9. Цифровая вселенная «Сеть»"},
+  {id: "ch10", title: "Глава 10. Угроза из будущего"},
+  {id: "ch11", title: "Глава 11. Юниверсум"}
+];
+
+const sidebar = document.getElementById('sidebar');
+const content = document.getElementById('content');
+chapters.forEach(chapter => {
+  const link = document.createElement('a');
+  link.href = '#' + chapter.id;
+  link.textContent = chapter.title;
+  sidebar.appendChild(link);
+  
+  const heading = chapter.title.startsWith('Интерлюдия') ? document.createElement('h2') : document.createElement('h1');
+  heading.id = chapter.id;
+  heading.textContent = chapter.title;
+  content.appendChild(heading);
+
+  const p = document.createElement('p');
+  p.textContent = "Реальный текст для " + chapter.title + " здесь... (сюда вставляется текст из исходной книги)";
+  content.appendChild(p);
+});
+</script>
+</body>
+</html>
