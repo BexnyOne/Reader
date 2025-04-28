@@ -50,7 +50,7 @@ header {
   padding: 20px;
   overflow-y: auto;
   border-right: 1px solid #ddd;
-  transition: transform 0.3s ease, visibility 0.3s ease;
+  transition: transform 0.3s ease, visibility 0.3s ease, opacity 0.5s ease;
   position: fixed;
   top: 60px;
   left: 0;
@@ -62,15 +62,16 @@ header {
 .sidebar a {
   display: block;
   margin-bottom: 10px;
-  padding: 8px 10px;
+  padding: 12px 15px;
   text-decoration: none;
   color: inherit;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background 0.4s;
 }
 .sidebar a.active {
-  background: linear-gradient(to bottom, rgba(108,92,231,0.3), rgba(108,92,231,0));
+  background: rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   color: var(--accent);
 }
 .dark-theme .sidebar {
@@ -81,10 +82,12 @@ header {
   .sidebar {
     transform: translateX(-100%);
     visibility: hidden;
+    opacity: 0;
   }
   .sidebar.show {
     transform: translateX(0);
     visibility: visible;
+    opacity: 1;
   }
 }
 .page-container {
@@ -92,8 +95,6 @@ header {
   padding: 20px;
   transition: margin-left 0.3s ease;
 }
-
-/* Когда сайдбар открыт (на ПК) */
 @media (min-width: 769px) {
   .sidebar-open .page-container {
     margin-left: 250px;
@@ -140,6 +141,45 @@ p {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: var(--accent);
+}
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
 </style>
 </head>
 <body>
@@ -152,25 +192,20 @@ p {
 </header>
 <div class="container">
   <nav class="sidebar" id="sidebar"></nav>
-
   <main class="page-container" id="content">
-    <div class="page" id="part1">
-      <div class="part-block"><h2>ЧАСТЬ 1</h2></div>
-    </div>
-    <div class="page" id="chapter1"><h1>Глава 1. Да здравствует новый Творец!</h1><p>...</p></div>
-    <div class="page" id="chapter2"><h1>Глава 2. Арканум и Горный дворец</h1><p>...</p></div>
-    <div class="page" id="chapter3"><h1>Глава 3. Архитектор</h1><p>...</p></div>
-    <div class="page" id="appendix1"><h2>Дополнение 1. История Некто</h2><p>...</p></div>
-    <div class="page" id="part2">
-      <div class="part-block"><h2>ЧАСТЬ 2</h2></div>
-    </div>
-    <div class="page" id="interlude1"><h2>Интерлюдия 1</h2><p>...</p></div>
-    <div class="page" id="chapter4"><h1>Глава 1. Сон или реальность?</h1><p>...</p></div>
-    <div class="page" id="chapter5"><h1>Глава 2. «Слава пользователям!»</h1><p>...</p></div>
-    <div class="page" id="chapter6"><h1>Глава 3. Цифровая вселенная «Сеть»</h1><p>...</p></div>
-    <div class="page" id="chapter7"><h1>Глава 4. Угроза из будущего</h1><p>...</p></div>
-    <div class="page" id="interlude2"><h2>Интерлюдия 2</h2><p>...</p></div>
-    <div class="page" id="chapter8"><h1>Глава 5. Юниверсум</h1><p>...</p></div>
+    <div class="page" id="part1"><div class="part-block"><h2>ЧАСТЬ 1</h2></div></div>
+    <div class="page" id="chapter1"><h1>Глава 1. Да здравствует новый Творец!</h1><p></p></div>
+    <div class="page" id="chapter2"><h1>Глава 2. Арканум и Горный дворец</h1><p></p></div>
+    <div class="page" id="chapter3"><h1>Глава 3. Архитектор</h1><p></p></div>
+    <div class="page" id="appendix1"><h2>Дополнение 1. История Некто</h2><p></p></div>
+    <div class="page" id="part2"><div class="part-block"><h2>ЧАСТЬ 2</h2></div></div>
+    <div class="page" id="interlude1"><h2>Интерлюдия 1</h2><p></p></div>
+    <div class="page" id="chapter4"><h1>Глава 1. Сон или реальность?</h1><p></p></div>
+    <div class="page" id="chapter5"><h1>Глава 2. «Слава пользователям!»</h1><p></p></div>
+    <div class="page" id="chapter6"><h1>Глава 3. Цифровая вселенная «Сеть»</h1><p></p></div>
+    <div class="page" id="chapter7"><h1>Глава 4. Угроза из будущего</h1><p></p></div>
+    <div class="page" id="interlude2"><h2>Интерлюдия 2</h2><p></p></div>
+    <div class="page" id="chapter8"><h1>Глава 5. Юниверсум</h1><p></p></div>
   </main>
 </div>
 <script>
@@ -184,9 +219,9 @@ p {
     document.body.classList.toggle('dark-theme');
   });
 
- toggleSidebarBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('show');
-  document.body.classList.toggle('sidebar-open');
+  toggleSidebarBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('show');
+    document.body.classList.toggle('sidebar-open');
   });
 
   sidebar.innerHTML = '';
