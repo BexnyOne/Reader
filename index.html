@@ -89,12 +89,14 @@ header {
 }
 .page-container {
   flex: 1;
-  margin-left: 250px;
   padding: 20px;
+  transition: margin-left 0.3s ease;
 }
-@media (max-width: 768px) {
-  .page-container {
-    margin-left: 0;
+
+/* Когда сайдбар открыт (на ПК) */
+@media (min-width: 769px) {
+  .sidebar-open .page-container {
+    margin-left: 250px;
   }
 }
 .page {
@@ -182,8 +184,9 @@ p {
     document.body.classList.toggle('dark-theme');
   });
 
-  toggleSidebarBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('show');
+ toggleSidebarBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('show');
+  document.body.classList.toggle('sidebar-open');
   });
 
   sidebar.innerHTML = '';
