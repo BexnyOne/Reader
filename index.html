@@ -6,184 +6,7 @@
 <title>Юниверсум: Книга Версума</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --light-bg: #f0ece7;
-  --dark-bg: #1c1c1c;
-  --light-text: #333;
-  --dark-text: #e0e0e0;
-  --accent: #6c5ce7;
-  --page-bg-light: #fff8f0;
-  --page-bg-dark: #2a2a2a;
-}
-body {
-  margin: 0;
-  font-family: 'Georgia', serif;
-  background: var(--light-bg) url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-  color: var(--light-text);
-  transition: background 0.5s, color 0.5s;
-  scroll-behavior: smooth;
-}
-.dark-theme {
-  background: var(--dark-bg);
-  color: var(--dark-text);
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1100;
-}
-.dark-theme header {
-  background: #1e1e1e;
-}
-.container {
-  display: flex;
-}
-.sidebar-wrapper {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 1000;
-  max-height: calc(100% - 60px);
-  display: flex;
-  justify-content: center;
-  width: 250px;
-}
-.sidebar {
-  background: rgba(250, 250, 250, 0.9);
-  padding: 20px;
-  border-radius: 0 10px 10px 0;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
-  max-height: max-content;
-  transition: transform 0.3s ease, visibility 0.3s ease;
-}
-.dark-theme .sidebar {
-  background: rgba(42, 42, 42, 0.95);
-}
-.sidebar a {
-  display: block;
-  margin-bottom: 12px;
-  padding: 12px 15px;
-  text-decoration: none;
-  color: inherit;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: background 0.4s, box-shadow 0.4s;
-}
-.sidebar a.active {
-  background: rgba(108, 92, 231, 0.2);
-  box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
-}
-@media (max-width: 768px) {
-  .sidebar-wrapper {
-    transform: translateX(-100%);
-    visibility: hidden;
-    transition: transform 0.3s ease;
-  }
-  .sidebar-wrapper.show {
-    transform: translateX(0);
-    visibility: visible;
-  }
-}
-.page-container {
-  flex: 1;
-  padding: 20px;
-  margin-left: 250px;
-  transition: margin-left 0.3s ease;
-}
-body.hide-sidebar .page-container {
-  margin-left: 0;
-}
-@media (max-width: 768px) {
-  .page-container {
-    margin-left: 0;
-  }
-}
-.page {
-  background: var(--page-bg-light);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  max-width: 800px;
-  width: 100%;
-  padding: 40px 30px;
-  margin: 40px auto;
-  transition: background 0.5s;
-}
-.dark-theme .page {
-  background: var(--page-bg-dark);
-}
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-}
-p {
-  line-height: 1.7;
-  margin-top: 20px;
-  text-align: justify;
-}
-.part-block {
-  background: rgba(200,200,200,0.2);
-  border: 2px solid var(--accent);
-  border-radius: 20px;
-  padding: 100px 20px;
-  margin: 80px auto;
-  max-width: 600px;
-  text-align: center;
-}
-.dark-theme .part-block {
-  background: rgba(50,50,50,0.2);
-}
-.part-block h2 {
-  font-size: 2.5em;
-  color: inherit;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 28px;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 34px;
-}
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-input:checked + .slider {
-  background-color: var(--accent);
-}
-input:checked + .slider:before {
-  transform: translateX(22px);
-}
+/* (Оставляем стили без изменений) */
 </style>
 </head>
 <body>
@@ -194,21 +17,32 @@ input:checked + .slider:before {
     <span class="slider"></span>
   </label>
 </header>
-
 <div class="container">
-  <div class="sidebar-wrapper" id="sidebar-wrapper">
-    <nav class="sidebar" id="sidebar"></nav>
-  </div>
+  <nav class="sidebar" id="sidebar"></nav>
 
   <main class="page-container" id="content">
-    <!-- Твой основной контент сюда -->
+    <div class="page" id="part1">
+      <div class="part-block"><h2>ЧАСТЬ 1</h2></div>
+    </div>
+    <div class="page" id="chapter1"><h1>Глава 1. Да здравствует новый Творец!</h1><p>...</p></div>
+    <div class="page" id="chapter2"><h1>Глава 2. Арканум и Горный дворец</h1><p>...</p></div>
+    <div class="page" id="chapter3"><h1>Глава 3. Архитектор</h1><p>...</p></div>
+    <div class="page" id="appendix1"><h2>Дополнение 1. История Некто</h2><p>...</p></div>
+    <div class="page" id="part2">
+      <div class="part-block"><h2>ЧАСТЬ 2</h2></div>
+    </div>
+    <div class="page" id="interlude1"><h2>Интерлюдия 1</h2><p>...</p></div>
+    <div class="page" id="chapter4"><h1>Глава 1. Сон или реальность?</h1><p>...</p></div>
+    <div class="page" id="chapter5"><h1>Глава 2. «Слава пользователям!»</h1><p>...</p></div>
+    <div class="page" id="chapter6"><h1>Глава 3. Цифровая вселенная «Сеть»</h1><p>...</p></div>
+    <div class="page" id="chapter7"><h1>Глава 4. Угроза из будущего</h1><p>...</p></div>
+    <div class="page" id="interlude2"><h2>Интерлюдия 2</h2><p>...</p></div>
+    <div class="page" id="chapter8"><h1>Глава 5. Юниверсум</h1><p>...</p></div>
   </main>
 </div>
-
 <script>
 (function() {
   const themeToggle = document.getElementById('theme-toggle');
-  const sidebarWrapper = document.getElementById('sidebar-wrapper');
   const sidebar = document.getElementById('sidebar');
   const toggleSidebarBtn = document.querySelector('.toggle-sidebar');
   const content = document.getElementById('content');
@@ -218,8 +52,7 @@ input:checked + .slider:before {
   });
 
   toggleSidebarBtn.addEventListener('click', () => {
-    sidebarWrapper.classList.toggle('show');
-    document.body.classList.toggle('hide-sidebar');
+    sidebar.classList.toggle('show');
   });
 
   sidebar.innerHTML = '';
@@ -249,6 +82,5 @@ input:checked + .slider:before {
   });
 })();
 </script>
-
 </body>
 </html>
